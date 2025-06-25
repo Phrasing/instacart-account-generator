@@ -132,7 +132,7 @@ async def get_code(mail: imaplib.IMAP4_SSL, email: str) -> Optional[str]:
 
     for num in email_ids:
         _, email_data = mail.fetch(num, "(RFC822)")
-        email_message = email.message_from_bytes(email_data[0][1])
+        email_message = mail.message_from_bytes(email_data[0][1])
 
         subject = email_message["Subject"]
         to_address = email_message["To"]
