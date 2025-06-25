@@ -119,7 +119,7 @@ def simulate_human_movement(hwnd, duration_seconds=3) -> None:
     print("Simulation finished.")
 
 
-async def get_code(mail: imaplib.IMAP4_SSL, email: str) -> Optional[str]:
+async def get_code(mail: imaplib.IMAP4_SSL, email_address: str) -> Optional[str]:
     mail.select("INBOX")
 
     search_criteria = (
@@ -132,12 +132,12 @@ async def get_code(mail: imaplib.IMAP4_SSL, email: str) -> Optional[str]:
 
     for num in email_ids:
         _, email_data = mail.fetch(num, "(RFC822)")
-        email_message = mail.message_from_bytes(email_data[0][1])
+        email_message = email.message_from_bytes(email_data[0][1])
 
         subject = email_message["Subject"]
         to_address = email_message["To"]
 
-        if to_address == email:
+        if to_address == email_address:
             code_match = code_pattern.search(subject)
             return code_match.group(1) if code_match else "Unknown"
 
