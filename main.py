@@ -497,10 +497,6 @@ def get_cdp_websocket_url(max_retries: int = 3) -> Optional[str]:
     return None
 
 
-async def random_sleep(d1=0.2, d2=1.5) -> None:
-    await asyncio.sleep(random.uniform(d1, d2))
-
-
 async def click_element(locator: Locator) -> None:
     await expect(locator).to_be_visible(timeout=global_playwright_timeout)
     await locator.click()
@@ -558,7 +554,7 @@ async def submit_verification_code(page: Page, email: str, wait_for_code_func) -
 
     code_input = page.get_by_role("textbox", name="Enter code")
     await code_input.wait_for(state="visible", timeout=global_playwright_timeout)
-    await random_sleep()
+    await human_like_pause()
     await fill_input(page, code_input, code, delay_range=(250, 1000))
 
 
@@ -571,12 +567,12 @@ async def save_address(page: Page) -> None:
         "menuitem", name="Add a new address", exact=True
     )
     await click_element(add_address_button)
-    await random_sleep()
+    await human_like_pause()
     add_address_input = page.get_by_role("textbox", name="Add a new address")
     await click_element(add_address_input)
     await fill_input(page, add_address_input, address)
 
-    await random_sleep(1, 2)
+    await human_like_pause()
 
     print("Attempting to select address suggestion by tabindex='-1'.")
     suggestion_button_locator = page.locator('button[tabindex="-1"]').first
