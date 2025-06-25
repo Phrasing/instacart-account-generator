@@ -36,7 +36,7 @@ This Python script automates the process of creating accounts on Instacart.com. 
 
 1.  **Clone the Repository** (if you have it in a Git repository):
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Phrasing/instacart-account-generator.git
     cd instacart-account-generator
     ```
 
