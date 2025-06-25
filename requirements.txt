@@ -1,0 +1,8 @@
+requests
+names
+pywin32
+numpy
+playwright
+playwright-recaptcha
+nstbrowser
+python-dotenv 
